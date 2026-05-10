@@ -1,0 +1,59 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+string encrypt(string text, int key)
+{
+    string result = "";
+
+    for (int i = 0; i < text.length(); i++)
+    {
+        // Simple XOR encryption
+        result += char(text[i] ^ key);
+    }
+
+    return result;
+}
+
+string decrypt(string text, int key)
+{
+    string result = "";
+
+    for (int i = 0; i < text.length(); i++)
+    {
+        // XOR again for decryption
+        result += char(text[i] ^ key);
+    }
+
+    return result;
+}
+
+int main()
+{
+    string plaintext;
+    int key;
+
+    cout << "Enter plaintext: ";
+    getline(cin, plaintext);
+
+    cout << "Enter numeric key: ";
+    cin >> key;
+
+    // Encryption
+    string ciphertext = encrypt(plaintext, key);
+
+    cout << "\nEncrypted Text: ";
+
+    for (int i = 0; i < ciphertext.length(); i++)
+    {
+        cout << int(ciphertext[i]) << " ";
+    }
+
+    // Decryption
+    string decrypted = decrypt(ciphertext, key);
+
+    cout << "\n\nDecrypted Text: " << decrypted;
+
+    return 0;
+}
