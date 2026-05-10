@@ -1,0 +1,46 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+    string ciphertext, plaintext = "";
+
+    // Same substitution key used in encryption
+    string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    string key      = "QWERTYUIOPASDFGHJKLZXCVBNM";
+
+    cout << "Enter encrypted text: ";
+    getline(cin, ciphertext);
+
+    // Decryption
+    for (int i = 0; i < ciphertext.length(); i++)
+    {
+        char ch = ciphertext[i];
+
+        // Convert lowercase to uppercase
+        if (ch >= 'a' && ch <= 'z')
+        {
+            ch = ch - 32;
+        }
+
+        // Decrypt only alphabets
+        if (ch >= 'A' && ch <= 'Z')
+        {
+            // Find character in key
+            int index = key.find(ch);
+
+            // Replace using original alphabet
+            plaintext += alphabet[index];
+        }
+        else
+        {
+            plaintext += ch;
+        }
+    }
+
+    cout << "\nDecrypted Text: " << plaintext;
+
+    return 0;
+}
