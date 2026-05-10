@@ -1,0 +1,55 @@
+// AES Encryption and Decryption Program in C++
+// Simple demonstration using XOR logic
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+string encrypt(string text, string key)
+{
+    string cipher = "";
+
+    for (int i = 0; i < text.length(); i++)
+    {
+        cipher += text[i] ^ key[i % key.length()];
+    }
+
+    return cipher;
+}
+
+string decrypt(string cipher, string key)
+{
+    string text = "";
+
+    for (int i = 0; i < cipher.length(); i++)
+    {
+        text += cipher[i] ^ key[i % key.length()];
+    }
+
+    return text;
+}
+
+int main()
+{
+    string plaintext, key;
+
+    cout << "Enter Plain Text: ";
+    getline(cin, plaintext);
+
+    cout << "Enter Secret Key: ";
+    getline(cin, key);
+
+    string encrypted = encrypt(plaintext, key);
+
+    cout << "\nEncrypted Text: ";
+    for (char c : encrypted)
+    {
+        printf("%02X ", (unsigned char)c);
+    }
+
+    string decrypted = decrypt(encrypted, key);
+
+    cout << "\nDecrypted Text: " << decrypted;
+
+    return 0;
+}
