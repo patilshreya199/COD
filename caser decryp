@@ -1,0 +1,36 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+    string text;
+    int key;
+
+    cout << "Enter encrypted text: ";
+    getline(cin, text);
+
+    cout << "Enter key value: ";
+    cin >> key;
+
+    // Decryption
+    for (int i = 0; i < text.length(); i++)
+    {
+        // For uppercase letters
+        if (text[i] >= 'A' && text[i] <= 'Z')
+        {
+            text[i] = ((text[i] - 'A' - key + 26) % 26) + 'A';
+        }
+
+        // For lowercase letters
+        else if (text[i] >= 'a' && text[i] <= 'z')
+        {
+            text[i] = ((text[i] - 'a' - key + 26) % 26) + 'a';
+        }
+    }
+
+    cout << "\nDecrypted Text: " << text;
+
+    return 0;
+}
